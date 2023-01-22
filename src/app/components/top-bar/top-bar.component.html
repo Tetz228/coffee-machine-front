@@ -15,9 +15,11 @@
     <a [routerLink]="['login']" class="element__link">Войти</a>
   </li>
   <li *ngIf="user | async" class="top-bar__element_right">
-    <a class="element__link">Пополнить баланс</a>
+    <a (click)="openWindowUpdateBalance()" class="element__link">Пополнить баланс</a>
   </li>
   <li *ngIf="user | async as user" class="top-bar__element_right">
     <p class="text-field text-field__p">Баланс: {{user.balance | currency: 'RUB': 'symbol-narrow'}}</p>
   </li>
 </ul>
+
+<app-update-balance *ngIf="isShowModalUpdateBalance()"></app-update-balance>

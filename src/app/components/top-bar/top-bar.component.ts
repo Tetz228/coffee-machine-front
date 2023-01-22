@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {UsersService} from "../../services/users.service";
+import {UpdateBalanceService} from "../../services/update-balance.service";
 
 import {Observable} from "rxjs";
 import {User} from "../../models/user";
@@ -26,9 +27,12 @@ export class TopBarComponent implements OnInit {
    * Компонент панель навигации.
    * @param authService - Сервис для работы с аутентификацией.
    * @param usersService - Сервис для работы с пользователем.
+   * @param updateBalanceService - Сервис для работы с пополнением баланса.
    */
   constructor(private authService: AuthService,
-              public usersService: UsersService) {
+              public usersService: UsersService,
+              private updateBalanceService: UpdateBalanceService,
+  ) {
   }
 
   /**
@@ -44,6 +48,20 @@ export class TopBarComponent implements OnInit {
    */
   logout() {
     this.usersService.logout();
+  }
+
+  /**
+   * Если true - окно пополнения баланса открыто, иначе false.
+   */
+  isShowModalUpdateBalance() {
+    return this.updateBalanceService.isShowModalUpdateBalance;
+  }
+
+  /**
+   * Открытие окна пополнения баланса.
+   */
+  openWindowUpdateBalance() {
+    this.updateBalanceService.openWindowUpdateBalance();
   }
 }
 
