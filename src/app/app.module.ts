@@ -10,12 +10,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CoffeesComponent} from "./components/coffees/coffees.component";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StatisticsComponent} from "./components/statistics/statistics.component";
+import {NgToastModule} from "ng-angular-popup";
+import {SignUpComponent} from "./components/sign-up/sign-up.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     CoffeesComponent,
+    SignUpComponent,
     StatisticsComponent
   ],
   imports: [
@@ -23,6 +26,7 @@ import {StatisticsComponent} from "./components/statistics/statistics.component"
     HttpClientModule,
     AppRoutingModule,
     NgxPaginationModule,
+    NgToastModule,
     FormsModule,
     ReactiveFormsModule,
   ],
