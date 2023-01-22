@@ -1,5 +1,7 @@
 {
   "baseUrl": "https://localhost:7046/api",
   "countCoffeesPage": "50",
+  "countStatisticsPage": "20",
   "debounceTimeFindCoffees": "800",
+  "debounceTimeFindStatistics": "800"
 }
