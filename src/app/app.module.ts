@@ -12,6 +12,15 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {StatisticsComponent} from "./components/statistics/statistics.component";
 import {NgToastModule} from "ng-angular-popup";
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
+import {SignInComponent} from "./components/sign-in/sign-in.component";
+import {JwtModule} from "@auth0/angular-jwt";
+
+/**
+ * Получение токена доступа.
+ */
+export function tokenGetter() {
+  return localStorage.getItem("accessToken");
+}
 
 @NgModule({
   declarations: [
@@ -19,7 +28,8 @@ import {SignUpComponent} from "./components/sign-up/sign-up.component";
     TopBarComponent,
     CoffeesComponent,
     SignUpComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +39,13 @@ import {SignUpComponent} from "./components/sign-up/sign-up.component";
     NgToastModule,
     FormsModule,
     ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:7046"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [
     {

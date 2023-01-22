@@ -1,8 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {Coffee} from "../../models/coffee";
-import {debounceTime, distinctUntilChanged, startWith, Subject, tap} from "rxjs";
+import {debounceTime, distinctUntilChanged, startWith, Subject, Subscription, tap} from "rxjs";
 import {CoffeesService} from "../../services/coffees.service";
 import {FormControl} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {UsersService} from "../../services/users.service";
+import {User} from "../../models/user";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-coffees',
@@ -14,7 +18,7 @@ import {FormControl} from "@angular/forms";
 /**
  * Компонент кофе.
  */
-export class CoffeesComponent implements OnInit {
+export class CoffeesComponent implements OnInit, OnDestroy {
   /**
    * Выбранный кофе.
    */
@@ -56,16 +60,33 @@ export class CoffeesComponent implements OnInit {
   debounceTimeCoffees: number;
 
   /**
+   * Подписка на пользователя.
+   */
+  subscriptionUser: Subscription;
+
+  /**
+   * Авторизированный пользователь.
+   */
+  user: User | null;
+
+  /**
    * Компонент кофе.
    * @param coffeesService - Сервис для работы с кофе.
+   * @param authService - Сервис для работы с аутентификацией.
+   * @param usersService - Сервис для работы с пользователем.
+   * @param toastService - Сервис для работы с уведомлениями.
    */
-  constructor(private coffeesService: CoffeesService) {
+  constructor(private coffeesService: CoffeesService,
+              public authService: AuthService,
+              private usersService: UsersService,
+              private toastService: NgToastService) {
   }
 
   /**
    * Инициализация компонента.
    */
   ngOnInit(): void {
+    this.subscriptionUser = this.usersService.getObservableUser().pipe(tap(value => this.user = value)).subscribe();
     this.findControl = new FormControl();
     this.subjectCoffees = new Subject<Coffee[]>();
     this.debounceTimeCoffees = this.coffeesService.DebounceTimeCoffees;
@@ -85,6 +106,13 @@ export class CoffeesComponent implements OnInit {
   }
 
   /**
+   * Уничтожение компонента.
+   */
+  ngOnDestroy(): void {
+    this.subscriptionUser.unsubscribe();
+  }
+
+  /**
    * Получение новой страницы.
    * @param currentNumberPage - Текущий номер страницы.
    */
@@ -101,6 +129,13 @@ export class CoffeesComponent implements OnInit {
     this.coffeesService.getCoffeesParameters(this.searchFilter, this.currentNumberPage, this.countCoffeesPage)
       .pipe(tap(itemsParameters => this.totalCountCoffees = itemsParameters.totalCountItems))
       .subscribe(value => this.subjectCoffees.next(value.items));
+  }
+
+  /**
+   * Проверка валидности токена.
+   */
+  IsTokenVerification() {
+    return this.authService.IsTokenVerification();
   }
 
   /**

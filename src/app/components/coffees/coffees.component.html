@@ -21,9 +21,10 @@
     <p class="list-coffees__coffee">
       {{ coffee.price | currency: 'RUB': 'symbol-narrow'}}
     </p>
-    <button class="button">Выбрать</button>
+    <button *ngIf="IsTokenVerification()" class="button">Выбрать</button>
   </div>
 </div>
+
 
 <pagination-controls (pageChange)="getPage($event)"
                      class="pagination-controls_align-center"

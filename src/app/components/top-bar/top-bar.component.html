@@ -5,19 +5,19 @@
   <li class="top-bar__element_left">
     <a [routerLink]="['statistics']" class="element__link">Статистики</a>
   </li>
-  <li class="top-bar__element_right">
-    <a class="element__link">Выйти</a>
+  <li *ngIf="user | async" class="top-bar__element_right">
+    <a (click)="logout()" class="element__link">Выйти</a>
   </li>
-  <li class="top-bar__element_right">
+  <li *ngIf="!(user | async)" class="top-bar__element_right">
     <a [routerLink]="['sign-up']" class="element__link">Зарегистрироваться</a>
   </li>
-  <li class="top-bar__element_right">
-    <a class="element__link">Войти</a>
+  <li *ngIf="!(user | async)" class="top-bar__element_right">
+    <a [routerLink]="['login']" class="element__link">Войти</a>
   </li>
-  <li class="top-bar__element_right">
+  <li *ngIf="user | async" class="top-bar__element_right">
     <a class="element__link">Пополнить баланс</a>
   </li>
-  <li class="top-bar__element_right">
-    <p class="text-field text-field__p">Баланс: {{0 | currency: 'RUB': 'symbol-narrow'}}</p>
+  <li *ngIf="user | async as user" class="top-bar__element_right">
+    <p class="text-field text-field__p">Баланс: {{user.balance | currency: 'RUB': 'symbol-narrow'}}</p>
   </li>
 </ul>
