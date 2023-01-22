@@ -1,0 +1,17 @@
+<div (click)="closeWindowOrder()" class="overlay"></div>
+<div class="overlay__container">
+  <h1 class="header">Покупка кофе</h1>
+  <br>
+
+  <div class="container__content">
+    <p class="text-field text-field__p">Выбран кофе: {{selectCoffee.name}}</p>
+    <p class="text-field text-field__p">Цена за кофе: {{selectCoffee.price | currency: 'RUB': 'symbol-narrow'}}</p>
+    <p class="text-field text-field__p">Ваша сдача составит:  {{sumChanges | currency: 'RUB': 'symbol-narrow'}}</p>
+  </div>
+
+  <div class="container__action">
+    <button (click)="createOrderAndCloseWindowOrder()" class="button">Купить</button>
+    <button (click)="closeWindowOrder()" class="button">Отмена</button>
+  </div>
+</div>
+

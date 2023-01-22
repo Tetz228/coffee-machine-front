@@ -67,7 +67,7 @@ export class UsersService {
     }
 
     const token = this.authService.getAccessToken();
-    if(token){
+    if (token) {
       const userId = this.jwtHelper.decodeToken(token.toString()).Id;
 
       return this.http.get<User>(`${this.config.baseUrl}/Users/${userId}`).pipe(tap((value) => this.setUserOrNull(value)));
