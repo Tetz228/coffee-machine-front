@@ -1,0 +1,46 @@
+<div class="overlay">
+  <div class="overlay__container">
+    <h1 class="header">Авторизация</h1>
+
+    <div class="container__content">
+      <form (ngSubmit)="loginUser()" [formGroup]="loginForm">
+        <div class="content__input">
+          <input class="text-field text-field__input" formControlName="login" placeholder="Логин">
+          <p *ngIf="loginForm.controls['login'].dirty && loginForm.controls['login'].hasError('required')"
+             class="text-field__p text-field_danger">
+            <i>*Логин не может быть пустым.</i>
+          </p>
+          <p *ngIf="loginForm.controls['login'].dirty && loginForm.controls['login'].hasError('minlength')"
+             class="text-field__p text-field_danger">
+            <i>*Минимальная длина логина 2 символа.</i>
+          </p>
+          <p *ngIf="loginForm.controls['login'].dirty && loginForm.controls['login'].hasError('maxlength')"
+             class="text-field__p text-field_danger">
+            <i>*Максимальная длина логина 30 символа.</i>
+          </p>
+        </div>
+
+        <div class="content__input">
+          <input class="text-field text-field__input" formControlName="password" placeholder="Пароль" type="password">
+          <p *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].hasError('required')"
+             class="text-field__p text-field_danger">
+            <i>*Пароль не может быть пустым.</i>
+          </p>
+          <p *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].hasError('minlength')"
+             class="text-field__p text-field_danger">
+            <i>*Минимальная длина пароля 2 символа.</i>
+          </p>
+          <p *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].hasError('maxlength')"
+             class="text-field__p text-field_danger">
+            <i>*Максимальная длина пароля 30 символа.</i>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="container__action">
+      <button (click)="loginUser()" class="button" type="submit">Войти</button>
+      <button (click)="navigateOnCoffees()" class="button">Отмена</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,10 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {UsersService} from "../../services/users.service";
+
+import {Observable} from "rxjs";
+import {User} from "../../models/user";
+
 
 @Component({
   selector: 'app-top-bar',
@@ -10,6 +16,34 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 /**
  * Компонент панель навигации.
  */
-export class TopBarComponent {
+export class TopBarComponent implements OnInit {
+  /**
+   * Отслеживаемый пользователь.
+   */
+  user: Observable<User | null>;
+
+  /**
+   * Компонент панель навигации.
+   * @param authService - Сервис для работы с аутентификацией.
+   * @param usersService - Сервис для работы с пользователем.
+   */
+  constructor(private authService: AuthService,
+              public usersService: UsersService) {
+  }
+
+  /**
+   * Инициализация компонента.
+   */
+  ngOnInit(): void {
+    this.user = this.usersService.getObservableUser();
+    this.usersService.getAuthenticatedUser()?.subscribe();
+  }
+
+  /**
+   * Выйти из аккаунта.
+   */
+  logout() {
+    this.usersService.logout();
+  }
 }
 
