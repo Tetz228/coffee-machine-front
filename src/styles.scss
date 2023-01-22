@@ -2,6 +2,39 @@
   box-sizing: border-box;
 }
 
+.header {
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 0;
+  font-family: Roboto, serif;
+}
+
+.button {
+  background-color: #d2cfcf;
+  border: none;
+  height: 40px;
+  color: black;
+  border-radius: 4px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #c2bebe;
+  }
+
+  &.button_clear {
+    height: 35px;
+    margin-top: 61px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
 .text-field {
   font: {
     family: Roboto, serif;
@@ -13,4 +46,75 @@
   text-align: center;
   margin-bottom: 7px;
   font-size: 18px;
+}
+
+.text-field__input {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: calc(2.25rem + 2px);
+  padding: 0.2rem 0.75rem;
+
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-clip: padding-box;
+
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid #bdbdbd;
+
+  &.text-field__input_search {
+    margin-top: 60px;
+    margin-right: 5px;
+    width: 25%;
+    display: block;
+    padding-left: 2.5rem;
+  }
+
+  &::placeholder {
+    color: #212529;
+    opacity: 0.4;
+  }
+
+  &:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  }
+}
+
+.text-field__input.ng-dirty.ng-invalid {
+  border-color: red;
+
+  &:focus {
+    box-shadow: 0 0 0 0.1rem red;
+  }
+}
+
+.image__icon {
+  content: '';
+  color: #bdbdbd;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.image__icon_coffees {
+  height: 200px;
+}
+
+.image__icon_search {
+  display: flex;
+  bottom: 0;
+  height: 25px;
+  transform: translateY(265%) translateX(120%);
+}
+
+.pagination-controls_align-center {
+  text-align: center;
 }

@@ -1,6 +1,6 @@
 <ul class="top-bar">
   <li class="top-bar__element_left">
-    <a class="element__link">Кофе</a>
+    <a [routerLink]="['coffees']" class="element__link">Кофе</a>
   </li>
   <li class="top-bar__element_left">
     <a class="element__link">Статистики</a>
@@ -17,7 +17,7 @@
   <li class="top-bar__element_right">
     <a class="element__link">Пополнить баланс</a>
   </li>
-  <li  class="top-bar__element_right">
+  <li class="top-bar__element_right">
     <p class="text-field text-field__p">Баланс: {{0 | currency: 'RUB': 'symbol-narrow'}}</p>
   </li>
 </ul>

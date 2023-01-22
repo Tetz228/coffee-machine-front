@@ -1,0 +1,32 @@
+<div class="top-menu">
+  <h1 class="header">Список кофе</h1>
+
+  <img alt="Search" class="image__icon image__icon_search" src="assets/icon-search.svg"/>
+  <input [formControl]="findControl"
+         class="text-field text-field__input text-field__input_search"
+         placeholder="Поиск"
+         type="text">
+  <button (click)="clearFindControl()" class="button button_clear">X</button>
+</div>
+
+<div *ngIf="subjectCoffees | async as allCoffees" class="container">
+  <div
+    *ngFor="let coffee of allCoffees | paginate: {itemsPerPage: countCoffeesPage,
+     currentPage: currentNumberPage, totalItems: totalCountCoffees}"
+    class="container__list-coffees">
+    <img alt="Coffee" class="image__icon image__icon_coffees" src="../../../assets/icon-coffee.svg"/>
+    <p class="list-coffees__coffee">
+      {{ coffee.name }}
+    </p>
+    <p class="list-coffees__coffee">
+      {{ coffee.price | currency: 'RUB': 'symbol-narrow'}}
+    </p>
+    <button class="button">Выбрать</button>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="getPage($event)"
+                     class="pagination-controls_align-center"
+                     nextLabel="Следующая"
+                     previousLabel="Предыдущая">
+</pagination-controls>
