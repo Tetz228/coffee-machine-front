@@ -1,0 +1,16 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.text-field {
+  font: {
+    family: Roboto, serif;
+    size: 16px;
+  };
+}
+
+.text-field__p {
+  text-align: center;
+  margin-bottom: 7px;
+  font-size: 18px;
+}

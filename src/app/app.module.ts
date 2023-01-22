@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {AppConfigService, initializerConfig} from "../config/app-config.service";
 import {HttpClientModule} from "@angular/common/http";
+import {TopBarComponent} from "./components/top-bar/top-bar.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,
