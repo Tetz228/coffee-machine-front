@@ -14,6 +14,7 @@ import {NgToastModule} from "ng-angular-popup";
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {SignInComponent} from "./components/sign-in/sign-in.component";
 import {JwtModule} from "@auth0/angular-jwt";
+import {UpdateBalanceComponent} from "./components/update-balance/update-balance.component";
 
 /**
  * Получение токена доступа.
@@ -29,7 +30,8 @@ export function tokenGetter() {
     CoffeesComponent,
     SignUpComponent,
     StatisticsComponent,
-    SignInComponent
+    SignInComponent,
+    UpdateBalanceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div (click)="closeWindowUpdateBalance()" class="overlay"></div>
+
+<div class="overlay__container">
+  <h1 class="header">Пополнение баланса</h1>
+
+  <div class="container__content">
+    <div *ngIf="user | async as user">
+      <p class="text-field text-field__p">
+        Ваш баланс: {{[user.balance | currency: 'RUB': 'symbol-narrow']}}
+      </p>
+    </div>
+
+    <form (ngSubmit)="replenishBalance()"
+          [formGroup]="updateBalanceForm">
+      <input class="text-field text-field__input"
+             formControlName="refillAmount"
+             placeholder="Сумма пополнения"
+             type="number">
+      <p *ngIf="updateBalanceForm.controls['refillAmount'].dirty &&
+      updateBalanceForm.controls['refillAmount'].hasError('required')" class="text-field__p text-field_danger">
+        <i>*Сумма не может быть пустой.</i>
+      </p>
+      <p *ngIf="updateBalanceForm.controls['refillAmount'].dirty &&
+      (updateBalanceForm.controls['refillAmount'].hasError('min'))" class="text-field__p text-field_danger">
+        <i>*Минимальная сумма пополнения 50 руб.</i>
+      </p>
+    </form>
+  </div>
+
+  <div class="container__action">
+    <button (click)="replenishBalance()" class="button" type="submit">Пополнить</button>
+    <button (click)="closeWindowUpdateBalance()" class="button">Закрыть</button>
+  </div>
+</div>
+
