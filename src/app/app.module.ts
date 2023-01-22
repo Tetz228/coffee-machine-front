@@ -9,12 +9,14 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CoffeesComponent} from "./components/coffees/coffees.component";
 import {NgxPaginationModule} from "ngx-pagination";
+import {StatisticsComponent} from "./components/statistics/statistics.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    CoffeesComponent
+    CoffeesComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

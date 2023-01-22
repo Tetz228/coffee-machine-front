@@ -12,10 +12,18 @@ export class AppConfig {
    */
   countCoffeesPage: number;
 
+  /**
+   * Количество статистик на странице.
+   */
+  countStatisticsPage: number;
 
   /**
    * Задержка перед поиском кофе.
    */
   debounceTimeFindCoffees: number;
 
+  /**
+   * Задержка перед поиском статистики.
+   */
+  debounceTimeFindStatistics: number;
 }
