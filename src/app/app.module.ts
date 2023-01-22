@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {AppConfigService, initializerConfig} from "../config/app-config.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TopBarComponent} from "./components/top-bar/top-bar.component";
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -16,6 +16,7 @@ import {SignInComponent} from "./components/sign-in/sign-in.component";
 import {JwtModule} from "@auth0/angular-jwt";
 import {UpdateBalanceComponent} from "./components/update-balance/update-balance.component";
 import {OrdersComponent} from "./components/orders/orders.component";
+import {Interceptor} from "./interceptors/interceptor";
 
 /**
  * Получение токена доступа.
@@ -57,7 +58,12 @@ export function tokenGetter() {
       multi: true,
       deps: [AppConfigService],
       useFactory: initializerConfig
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
