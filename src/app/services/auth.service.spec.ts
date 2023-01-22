@@ -1,14 +1,12 @@
 import {TestBed} from '@angular/core/testing';
 
 import {AuthService} from './auth.service';
-import {AppConfigService} from "../../config/app-config.service";
 import {createSpyFromClass, Spy} from "jasmine-auto-spies";
 import {HttpClient} from "@angular/common/http";
 import {JwtHelperService, JwtModule} from "@auth0/angular-jwt";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {tokenGetter} from "../app.module";
 import {Jwt} from "../models/jwt";
-import {AppConfig} from "../../config/app-config";
 
 /**
  * Тестирование сервиса для работы с аутентификацией.

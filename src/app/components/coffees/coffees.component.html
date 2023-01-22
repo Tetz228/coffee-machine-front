@@ -21,10 +21,14 @@
     <p class="list-coffees__coffee">
       {{ coffee.price | currency: 'RUB': 'symbol-narrow'}}
     </p>
-    <button *ngIf="IsTokenVerification()" class="button">Выбрать</button>
+    <button (click)="openWindowOrder(coffee)" *ngIf="IsTokenVerification()" class="button">Выбрать</button>
   </div>
 </div>
 
+<app-orders *ngIf="isShowModalOrder()"
+            [selectCoffee]=selectCoffee
+            [user]=user>
+</app-orders>
 
 <pagination-controls (pageChange)="getPage($event)"
                      class="pagination-controls_align-center"

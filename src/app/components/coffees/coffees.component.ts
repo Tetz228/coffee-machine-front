@@ -2,10 +2,12 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {Coffee} from "../../models/coffee";
 import {debounceTime, distinctUntilChanged, startWith, Subject, Subscription, tap} from "rxjs";
 import {CoffeesService} from "../../services/coffees.service";
+import {OrdersService} from "../../services/orders.service";
 import {FormControl} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {UsersService} from "../../services/users.service";
 import {User} from "../../models/user";
+import {OrderErrorMessages} from "../../error-messages/order-error-messages";
 import {NgToastService} from "ng-angular-popup";
 
 @Component({
@@ -72,11 +74,13 @@ export class CoffeesComponent implements OnInit, OnDestroy {
   /**
    * Компонент кофе.
    * @param coffeesService - Сервис для работы с кофе.
+   * @param orderService - Сервис для работы с заказами.
    * @param authService - Сервис для работы с аутентификацией.
    * @param usersService - Сервис для работы с пользователем.
    * @param toastService - Сервис для работы с уведомлениями.
    */
   constructor(private coffeesService: CoffeesService,
+              private orderService: OrdersService,
               public authService: AuthService,
               private usersService: UsersService,
               private toastService: NgToastService) {
@@ -143,5 +147,32 @@ export class CoffeesComponent implements OnInit, OnDestroy {
    */
   clearFindControl() {
     this.findControl.setValue("");
+  }
+
+  /**
+   * Если true - окно заказа открыто, иначе false.
+   */
+  isShowModalOrder() {
+    return this.orderService.isShowModalOrder;
+  }
+
+  /**
+   * Открытие окна заказа.
+   * @param selectCoffee - Выбранный кофе.
+   */
+  openWindowOrder(selectCoffee: Coffee) {
+    if (this.user === null || this.user?.balance < selectCoffee.price) {
+      this.toastService.error(
+        {
+          detail: OrderErrorMessages.Header,
+          summary: OrderErrorMessages.InsufficientBalance,
+          duration: 5000
+        });
+
+      return;
+    }
+    this.selectCoffee = selectCoffee;
+
+    this.orderService.openWindowOrder();
   }
 }

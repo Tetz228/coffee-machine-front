@@ -10,7 +10,7 @@ import {createSpyFromClass, Spy} from 'jasmine-auto-spies';
 import {tokenGetter} from "../app.module";
 import {User} from "../models/user";
 import {AppConfig} from "../../config/app-config";
-import {Router, RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 
 /**
  * Тестирование сервиса для работы с пользователем.
